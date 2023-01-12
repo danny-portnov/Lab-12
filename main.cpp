@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stack>
 #include <string>
+#include <queue>
 
 using namespace std;
 
@@ -41,10 +42,21 @@ string infix2postfix(const string& infix) {
 	return postfix;
 }
 
+void sort_array(int* arr, int len) {
+	priority_queue<int> pq(arr, arr + len);
+	for (int i = 0; i < len; i++)
+	{
+		arr[i] = pq.top();
+		pq.pop();
+	}
+}
+
 int main()
 {
 	cout << infix2postfix("(2+((3+4)*(5*6)))") << endl; //234+56**+
 	cout << infix2postfix("(2+((3*4)+5))") << endl; //234*+5+ or 234*5++ also okay
 	cout << infix2postfix("((1+2)-((3*(4/5))+6))") << endl; //12+345/*6+-
+	int arr[] = { 3,7,4,9,1 };
+	sort_array(arr, 5); // 9 7 4 3 1
 	return 0;
 }
